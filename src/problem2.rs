@@ -15,45 +15,49 @@ impl ListNode {
     }
 }
 
-pub fn add_two_numbers(
-    l1: Option<Box<ListNode>>,
-    l2: Option<Box<ListNode>>,
-) -> Option<Box<ListNode>> {
-    let (mut l1, mut l2) = (l1, l2);
-    let mut sum = 0;
-    let mut p: Option<Box<ListNode>> = None;
-    let mut pp = &mut p;
-    loop {
-        match (l1, l2) {
-            (Some(v1), Some(v2)) => {
-                sum += v1.val + v2.val;
-                l1 = v1.next;
-                l2 = v2.next;
-            }
-            (Some(v1), None) => {
-                sum += v1.val;
-                l1 = v1.next;
-                l2 = None;
-            }
-            (None, Some(v2)) => {
-                sum += v2.val;
-                l1 = None;
-                l2 = v2.next;
-            }
-            (None, None) => break,
-        }
-        *pp = Some(Box::new(ListNode::new(sum % 10)));
-        sum /= 10;
-        if let Some(p_inner) = pp {
-            pp = &mut p_inner.next
-        }
-    }
+pub struct Solution;
 
-    if sum != 0 {
-        *pp = Some(Box::new(ListNode::new(sum)));
-    }
+impl Solution {
+    pub fn add_two_numbers(
+        l1: Option<Box<ListNode>>,
+        l2: Option<Box<ListNode>>,
+    ) -> Option<Box<ListNode>> {
+        let (mut l1, mut l2) = (l1, l2);
+        let mut sum = 0;
+        let mut p: Option<Box<ListNode>> = None;
+        let mut pp = &mut p;
+        loop {
+            match (l1, l2) {
+                (Some(v1), Some(v2)) => {
+                    sum += v1.val + v2.val;
+                    l1 = v1.next;
+                    l2 = v2.next;
+                }
+                (Some(v1), None) => {
+                    sum += v1.val;
+                    l1 = v1.next;
+                    l2 = None;
+                }
+                (None, Some(v2)) => {
+                    sum += v2.val;
+                    l1 = None;
+                    l2 = v2.next;
+                }
+                (None, None) => break,
+            }
+            *pp = Some(Box::new(ListNode::new(sum % 10)));
+            sum /= 10;
+            if let Some(p_inner) = pp {
+                pp = &mut p_inner.next
+            }
+        }
 
-    return p;
+        if sum != 0 {
+            *pp = Some(Box::new(ListNode::new(sum)));
+        }
+
+        return p;
+    }
 }
 
 #[cfg(test)]
@@ -86,7 +90,7 @@ mod tests {
             })),
         }));
 
-        assert_eq!(add_two_numbers(a1, b1), result);
+        assert_eq!(Solution::add_two_numbers(a1, b1), result);
     }
 
     #[test]
@@ -97,7 +101,7 @@ mod tests {
 
         let result = Some(Box::new(ListNode::new(0)));
 
-        assert_eq!(add_two_numbers(a1, b1), result);
+        assert_eq!(Solution::add_two_numbers(a1, b1), result);
     }
 
     #[test]
@@ -117,6 +121,6 @@ mod tests {
             })),
         }));
 
-        assert_eq!(add_two_numbers(a1, b1), result);
+        assert_eq!(Solution::add_two_numbers(a1, b1), result);
     }
 }
