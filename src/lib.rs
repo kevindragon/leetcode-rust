@@ -4,11 +4,17 @@ pub mod problem3;
 
 pub mod problem7;
 
+pub mod problem9;
+
+pub mod problem13;
+
 pub mod problem28;
 
 pub mod problem62;
 
 pub mod problem72;
+
+pub mod problem151;
 
 pub mod problem912;
 
