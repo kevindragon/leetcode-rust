@@ -6,7 +6,7 @@ pub struct Solution;
 impl Solution {
     pub fn roman_to_int(s: String) -> i32 {
         let chars = s.chars();
-        for c in chars {}
+        for _c in chars {}
         return 2;
     }
 }
